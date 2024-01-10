@@ -1,7 +1,7 @@
 import { createClientsForChains } from "./lib/viem-client";
 import createServer from "./server";
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 const start = async () => {
   try {
