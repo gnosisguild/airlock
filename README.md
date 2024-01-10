@@ -1,3 +1,7 @@
+
+![airlock](https://github.com/gnosisguild/airlock/assets/6718506/1d6e14ea-51bd-441c-b568-33c23667845e)
+
+
 ## Airlock
 
 Airlock is Gnosis Guild's proxy server that masks our api keys.
