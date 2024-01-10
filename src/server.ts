@@ -42,10 +42,7 @@ const createServer = async (): Promise<express.Application> => {
     res.sendStatus(404);
   }
 
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
-  app.use(cookieParser());
-  app.use(morgan("tiny"));
+  app.use(morgan("dev"));
   app.use(
     cors({
       origin: function (origin, callback) {
