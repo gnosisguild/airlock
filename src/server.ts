@@ -64,6 +64,7 @@ const createServer = async (): Promise<express.Application> => {
       credentials: true,
     }),
   );
+  app.get("/health", (req, res) => res.sendStatus(200));
   app.use("/api/v1/", chainRouter);
   app.use(defaultRoute);
   app.use(errorHandler);
