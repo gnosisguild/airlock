@@ -1,5 +1,6 @@
 
-![airlock](https://github.com/gnosisguild/airlock/assets/6718506/0d6a6d4b-3996-41e2-8a84-3aa08ef458c4)
+![airlock](https://github.com/gnosisguild/airlock/assets/6718506/1d6e14ea-51bd-441c-b568-33c23667845e)
+
 
 ## Airlock
 
