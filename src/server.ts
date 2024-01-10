@@ -18,6 +18,7 @@ const CORS_ORIGINS = [
   /gnosisguild\.org$/,
   /\.gnosisguild\.org$/,
   /.*-gnosis-guild\.vercel\.app$/,
+  /mech\.mom$/,
 ];
 
 const createServer = async (): Promise<express.Application> => {
