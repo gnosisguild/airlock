@@ -7,7 +7,7 @@ const start = async () => {
   try {
     const app = await createServer();
 
-    createClientsForChains();
+    await createClientsForChains();
 
     app.listen(PORT, () => {
       console.log(`Express server listening on port ${PORT}`);

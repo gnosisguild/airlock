@@ -1,8 +1,12 @@
 import { chains } from "@/lib/chains";
 import { Router } from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
+import apicache from "apicache";
 
 const chainRouter = Router();
+const sequenceCache = apicache
+  .options({ statusCodes: { include: [200] }, defaultDuration: "30 seconds" })
+  .middleware();
 
 const generateChainRoutes = (router: Router) => {
   for (const chainId in chains) {
@@ -30,6 +34,7 @@ const generateChainRoutes = (router: Router) => {
 
     router.use(
       `/${chainId}/sequence`,
+      sequenceCache,
       createProxyMiddleware({
         target: chain.sequenceURL,
         changeOrigin: true,

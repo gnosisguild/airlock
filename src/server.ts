@@ -1,17 +1,10 @@
 import express from "express";
-import {
-  createProxyMiddleware,
-  Filter,
-  Options,
-  RequestHandler,
-} from "http-proxy-middleware";
+import apicache from "apicache";
 
 import { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import path from "path";
-import { chains } from "./lib/chains";
 import chainRouter from "./routes/v1";
 
 const CORS_ORIGINS = [
@@ -65,6 +58,9 @@ const createServer = async (): Promise<express.Application> => {
     }),
   );
   app.get("/health", (req, res) => res.sendStatus(200));
+  app.get("/api/cache/performance", (req, res) => {
+    res.json(apicache.getPerformance());
+  });
   app.use("/api/v1/", chainRouter);
   app.use(defaultRoute);
   app.use(errorHandler);

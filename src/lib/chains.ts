@@ -18,6 +18,7 @@ type ChainInfo = {
     rpcNode: RPCNode;
     client?: PublicClient;
     sequenceURL: string;
+    blockHeight?: bigint;
   };
 };
 
