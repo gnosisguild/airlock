@@ -3,30 +3,17 @@ import { Router, Request, Response } from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import apicache from "apicache";
 import simpleHash from "@/lib/simple-hash";
+import { toHex } from "viem";
 
 const chainRouter = Router();
-const sequenceCache = apicache
+const moralisCache = apicache
   .options({
     statusCodes: { include: [200] },
     defaultDuration: "30 seconds",
-    appendKey: (req: Request, res: Response) => simpleHash(req.body),
   })
   .middleware();
 
 const generateChainRoutes = (router: Router) => {
-  // Proxy Sequence Metadata requests
-  router.use(
-    "/metadata",
-    createProxyMiddleware({
-      target: "https://metadata.sequence.app",
-      changeOrigin: true,
-      pathRewrite: {
-        "^/api/v1/metadata": "",
-      },
-    }),
-  );
-
-  // Some of our services have unique urls for each chain
   for (const chainId in chains) {
     const chain = chains[chainId];
 
@@ -44,23 +31,24 @@ const generateChainRoutes = (router: Router) => {
     );
 
     // Create Sequence Indexer Proxy routes for each chain
-    if (process.env.SEQUENCE_ACCESS_KEY === undefined) {
+    if (process.env.MORALIS_API_KEY === undefined) {
       console.warn(
-        "SEQUENCE_ACCESS_KEY is not set. Sequence Indexer routes will be rate limited.",
+        "MORALIS_API_KEY is not set. Sequence Indexer routes will be rate limited.",
       );
     }
 
     router.use(
-      `/${chainId}/sequence/indexer`,
-      // sequenceCache,
+      `/${chainId}/moralis`,
+      moralisCache,
       createProxyMiddleware({
-        target: chain.sequenceURL,
+        target: "https://deep-index.moralis.io/api/v2.2",
         changeOrigin: true,
-        pathRewrite: {
-          [`^/api/v1/${chainId}/sequence/indexer`]: "",
+        pathRewrite: (path, req) => {
+          const newPath = path.replace(`/api/v1/${chainId}/moralis`, "");
+          return newPath + `?chain=${toHex(parseInt(chainId))}`;
         },
         headers: {
-          "X-Access-Key": process.env.SEQUENCE_ACCESS_KEY || "",
+          "X-API-Key": process.env.MORALIS_API_KEY || "",
         },
       }),
     );
