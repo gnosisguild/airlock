@@ -1,14 +1,32 @@
 import { chains } from "@/lib/chains";
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import apicache from "apicache";
+import simpleHash from "@/lib/simple-hash";
 
 const chainRouter = Router();
 const sequenceCache = apicache
-  .options({ statusCodes: { include: [200] }, defaultDuration: "30 seconds" })
+  .options({
+    statusCodes: { include: [200] },
+    defaultDuration: "30 seconds",
+    appendKey: (req: Request, res: Response) => simpleHash(req.body),
+  })
   .middleware();
 
 const generateChainRoutes = (router: Router) => {
+  // Proxy Sequence Metadata requests
+  router.use(
+    "/metadata",
+    createProxyMiddleware({
+      target: "https://metadata.sequence.app",
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api/v1/sequence/metadata": "",
+      },
+    }),
+  );
+
+  // Some of our services have unique urls for each chain
   for (const chainId in chains) {
     const chain = chains[chainId];
 
@@ -33,13 +51,13 @@ const generateChainRoutes = (router: Router) => {
     }
 
     router.use(
-      `/${chainId}/sequence`,
+      `/${chainId}/sequence/indexer`,
       sequenceCache,
       createProxyMiddleware({
         target: chain.sequenceURL,
         changeOrigin: true,
         pathRewrite: {
-          [`^/api/v1/${chainId}/sequence`]: "",
+          [`^/api/v1/${chainId}/sequence/indexer`]: "",
         },
         headers: {
           "X-Access-Key": process.env.SEQUENCE_ACCESS_KEY || "",
