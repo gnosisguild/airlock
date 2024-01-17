@@ -52,7 +52,7 @@ const generateChainRoutes = (router: Router) => {
 
     router.use(
       `/${chainId}/sequence/indexer`,
-      sequenceCache,
+      // sequenceCache,
       createProxyMiddleware({
         target: chain.sequenceURL,
         changeOrigin: true,
