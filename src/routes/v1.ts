@@ -21,7 +21,7 @@ const generateChainRoutes = (router: Router) => {
       target: "https://metadata.sequence.app",
       changeOrigin: true,
       pathRewrite: {
-        "^/api/v1/sequence/metadata": "",
+        "^/api/v1/metadata": "",
       },
     }),
   );
