@@ -44,8 +44,15 @@ const generateChainRoutes = (router: Router) => {
         target: "https://deep-index.moralis.io/api/v2.2",
         changeOrigin: true,
         pathRewrite: (path, req) => {
-          const newPath = path.replace(`/api/v1/${chainId}/moralis`, "");
-          return newPath + `?chain=${toHex(parseInt(chainId))}`;
+          const [cleanedPath, params] = req.url.split("?");
+          const searchParams = new URLSearchParams(params);
+          const newPath = cleanedPath.replace(`/api/v1/${chainId}/moralis`, "");
+          const chainParams = new URLSearchParams(
+            `chain=${toHex(parseInt(chainId))}`,
+          );
+          return (
+            newPath + `?${chainParams.toString()}&${searchParams.toString()}`
+          );
         },
         headers: {
           "X-API-Key": process.env.MORALIS_API_KEY || "",
