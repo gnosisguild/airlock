@@ -35,8 +35,10 @@ const getPublicClient = (chainId: number) => {
   });
 };
 
-export const createClientsForChains = () => {
+export const createClientsForChains = async () => {
   for (const chainId in chains) {
     chains[chainId].client = getPublicClient(Number(chainId));
+    chains[chainId].blockHeight =
+      await chains[chainId].client?.getBlockNumber();
   }
 };
