@@ -8,8 +8,7 @@ import { toHex } from "viem";
 const chainRouter = Router();
 const moralisCache = apicache
   .options({
-    statusCodes: { include: [200] },
-    defaultDuration: "30 seconds",
+    defaultDuration: "5 minutes",
   })
   .middleware();
 
