@@ -58,6 +58,21 @@ const generateChainRoutes = (router: Router) => {
         },
       }),
     );
+
+    if (process.env.SUBGRAPH_STUDIO_API_KEY === undefined) {
+      console.warn("SUBGRAPH_STUDIO_API_KEY is not set");
+    }
+
+    router.use(
+      "/subgraph",
+      createProxyMiddleware({
+        target: `https://gateway-arbitrum.network.thegraph.com/api/${process.env.SUBGRAPH_STUDIO_API_KEY}/subgraphs/id/`,
+        changeOrigin: true,
+        pathRewrite: {
+          [`^/api/v1/subgraph`]: "",
+        },
+      }),
+    );
   }
 };
 
