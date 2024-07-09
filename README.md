@@ -18,6 +18,8 @@ Airlock is Gnosis Guild's proxy server that masks our api keys.
 
 - `api/v1/:chainId/rpc` - proxies requests to our hosted rpc nodes
 - `api/v1/:chainId/moralis` - proxies requests to the [Moralis indexer api](https://docs.moralis.io/web3-data-api/evm/reference)
+- `api/v1/subgraph` — proxies requests to The Graph subgraph studio
+- `api/v1/ipfs` — proxies ipfs CID requests through a paid pinata gateway
 
 ## Running Locally
 
