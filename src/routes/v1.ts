@@ -73,6 +73,27 @@ const generateChainRoutes = (router: Router) => {
         },
       }),
     );
+
+    if (
+      process.env.PINATA_GATEWAY_URL === undefined ||
+      process.env.PINATA_GATEWAY_KEY === undefined
+    ) {
+      console.warn("PINATA env vars are not set");
+    }
+
+    router.use(
+      "/ipfs",
+      createProxyMiddleware({
+        target: process.env.PINATA_GATEWAY_URL,
+        changeOrigin: true,
+        pathRewrite: {
+          [`^/api/v1/ipfs`]: "/ipfs",
+        },
+        headers: {
+          "x-pinata-gateway-token": process.env.PINATA_GATEWAY_KEY || "",
+        },
+      }),
+    );
   }
 };
 
