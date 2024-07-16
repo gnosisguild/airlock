@@ -1,8 +1,7 @@
 import { chains } from "@/lib/chains";
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import apicache from "apicache";
-import simpleHash from "@/lib/simple-hash";
 import { toHex } from "viem";
 
 const chainRouter = Router();

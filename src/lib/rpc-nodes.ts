@@ -51,4 +51,10 @@ export const rpcNodes: RPCNodes = {
     password: process.env.GNOSIS_RPC_PASSWORD,
     url: "https://nd-696-263-600.p2pify.com",
   },
+  11155111: {
+    //sepolia
+    username: process.env.SEPOLIA_RPC_USERNAME,
+    password: process.env.SEPOLIA_RPC_PASSWORD,
+    url: "https://ethereum-sepolia.core.chainstack.com",
+  },
 };

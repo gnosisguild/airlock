@@ -14,6 +14,10 @@ Airlock is Gnosis Guild's proxy server that masks our api keys.
 - Avalanche
 - Base
 
+#### Testnets
+
+- Sepolia
+
 ## Current Proxies
 
 - `api/v1/:chainId/rpc` - proxies requests to our hosted rpc nodes
