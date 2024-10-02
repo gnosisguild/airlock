@@ -25,6 +25,7 @@ const generateChainRoutes = (router: Router) => {
           [`^/api/v1/${chainId}/rpc`]: "",
         },
         auth: `${chain.rpcNode.username}:${chain.rpcNode.password}`,
+        ws: true,
       }),
     );
 
