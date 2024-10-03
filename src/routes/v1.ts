@@ -25,6 +25,19 @@ const generateChainRoutes = (router: Router) => {
           [`^/api/v1/${chainId}/rpc`]: "",
         },
         auth: `${chain.rpcNode.username}:${chain.rpcNode.password}`,
+      }),
+    );
+
+    // Create WebSocket Proxy routes for each chain
+    router.use(
+      `/${chainId}/rpc/ws`,
+      createProxyMiddleware({
+        target: chain.rpcNode.socketUrl,
+        changeOrigin: true,
+        pathRewrite: {
+          [`^/api/v1/${chainId}/rpc/ws`]: "",
+        },
+        auth: `${chain.rpcNode.username}:${chain.rpcNode.password}`,
         ws: true,
       }),
     );
