@@ -1,11 +1,12 @@
-import express from "express";
+import express, { Router } from "express";
 import apicache from "apicache";
 
 import { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 import chainRouter from "./routes/v1";
+import createProxyRoutes from "./routes/v1";
+import { ChainInfo } from "./lib/chains";
 
 const CORS_ORIGINS = [
   /gnosisguild\.org$/,
@@ -15,9 +16,12 @@ const CORS_ORIGINS = [
   /localhost/,
 ];
 
-const createServer = async (): Promise<express.Application> => {
+const createServer = async (
+  chains: ChainInfo,
+): Promise<express.Application> => {
   const app = express();
-
+  const router = Router();
+  createProxyRoutes(router, chains);
   // Custom error handler
   const errorHandler = (
     err: Error,
@@ -59,7 +63,7 @@ const createServer = async (): Promise<express.Application> => {
   app.get("/api/cache/performance", (req, res) => {
     res.json(apicache.getPerformance());
   });
-  app.use("/api/v1/", chainRouter);
+  app.use("/api/v1/", router);
   app.use(defaultRoute);
   app.use(errorHandler);
 

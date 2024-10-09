@@ -11,14 +11,20 @@ import {
 } from "viem/chains";
 import { RPCNode, rpcNodes } from "./rpc-nodes";
 import { PublicClient } from "viem";
+import { RequestHandler } from "http-proxy-middleware";
 
-type ChainInfo = {
-  [key: number]: {
-    chain: Chain;
-    rpcNode: RPCNode;
-    client?: PublicClient;
-    blockHeight?: bigint;
-  };
+export type AirlockChain = {
+  chain: Chain;
+  rpcNode: RPCNode;
+  client?: PublicClient;
+  blockHeight?: bigint;
+  rpcProxy?: RequestHandler;
+  rpcWsProxy?: RequestHandler;
+  moralisProxy?: RequestHandler;
+};
+
+export type ChainInfo = {
+  [key: number]: AirlockChain;
 };
 
 export const chains: ChainInfo = {
