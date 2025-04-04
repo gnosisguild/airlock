@@ -6,33 +6,20 @@ const createAuthedTransport = (chainId: number) => {
     rpcNode: { username, password, url },
   } = chains[chainId];
 
-  if (!username || !password) {
-    console.warn(
-      "No username or password provided for RPC node:",
-      chains[chainId].chain.name,
-    );
+  if (username || !password) {
     return http(url);
   }
 
   const auth =
     "Basic " + Buffer.from(username + ":" + password).toString("base64");
 
-  return http(url, {
-    fetchOptions: {
-      headers: {
-        Authorization: auth,
-      },
-    },
-  });
+  return http(url, { fetchOptions: { headers: { Authorization: auth } } });
 };
 
 const getPublicClient = (chainId: number) => {
   const transport = createAuthedTransport(chainId);
   const chain = chains[chainId].chain;
-  return createPublicClient({
-    transport,
-    chain,
-  });
+  return createPublicClient({ transport, chain });
 };
 
 export const createClientsForChains = async () => {
