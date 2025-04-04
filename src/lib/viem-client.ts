@@ -6,7 +6,11 @@ const createAuthedTransport = (chainId: number) => {
     rpcNode: { username, password, url },
   } = chains[chainId];
 
-  if (username || !password) {
+  if (!username || !password) {
+    console.warn(
+      "No username or password provided for RPC node:",
+      chains[chainId].chain.name,
+    );
     return http(url);
   }
 
