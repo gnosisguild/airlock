@@ -6,9 +6,7 @@ import { toHex } from "viem";
 
 const chainRouter = Router();
 const moralisCache = apicache
-  .options({
-    defaultDuration: "5 minutes",
-  })
+  .options({ defaultDuration: "5 minutes" })
   .middleware();
 
 const generateChainRoutes = (router: Router) => {
@@ -21,10 +19,10 @@ const generateChainRoutes = (router: Router) => {
       createProxyMiddleware({
         target: chain.rpcNode.url,
         changeOrigin: true,
-        pathRewrite: {
-          [`^/api/v1/${chainId}/rpc`]: "",
-        },
-        auth: `${chain.rpcNode.username}:${chain.rpcNode.password}`,
+        pathRewrite: { [`^/api/v1/${chainId}/rpc`]: "" },
+        auth:
+          chain.rpcNode.username &&
+          `${chain.rpcNode.username}:${chain.rpcNode.password}`,
       }),
     );
 
@@ -34,9 +32,7 @@ const generateChainRoutes = (router: Router) => {
       createProxyMiddleware({
         target: chain.rpcNode.socketUrl,
         changeOrigin: true,
-        pathRewrite: {
-          [`^/api/v1/${chainId}/rpc/ws`]: "",
-        },
+        pathRewrite: { [`^/api/v1/${chainId}/rpc/ws`]: "" },
         auth: `${chain.rpcNode.username}:${chain.rpcNode.password}`,
         ws: true,
       }),
@@ -66,9 +62,7 @@ const generateChainRoutes = (router: Router) => {
             newPath + `?${chainParams.toString()}&${searchParams.toString()}`
           );
         },
-        headers: {
-          "X-API-Key": process.env.MORALIS_API_KEY || "",
-        },
+        headers: { "X-API-Key": process.env.MORALIS_API_KEY || "" },
       }),
     );
 
@@ -81,9 +75,7 @@ const generateChainRoutes = (router: Router) => {
       createProxyMiddleware({
         target: `https://gateway-arbitrum.network.thegraph.com/api/${process.env.SUBGRAPH_STUDIO_API_KEY}/subgraphs/id/`,
         changeOrigin: true,
-        pathRewrite: {
-          [`^/api/v1/subgraph`]: "",
-        },
+        pathRewrite: { [`^/api/v1/subgraph`]: "" },
       }),
     );
 
@@ -99,9 +91,7 @@ const generateChainRoutes = (router: Router) => {
       createProxyMiddleware({
         target: process.env.PINATA_GATEWAY_URL,
         changeOrigin: true,
-        pathRewrite: {
-          [`^/api/v1/ipfs`]: "/ipfs",
-        },
+        pathRewrite: { [`^/api/v1/ipfs`]: "/ipfs" },
         headers: {
           "x-pinata-gateway-token": process.env.PINATA_GATEWAY_KEY || "",
         },

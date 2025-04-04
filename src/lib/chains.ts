@@ -6,8 +6,14 @@ import {
   polygon,
   base,
   optimism,
-  Chain,
   sepolia,
+  celo,
+  sonic,
+  berachain,
+  mantle,
+  Chain,
+  polygonZkEvm,
+  baseSepolia,
 } from "viem/chains";
 import { RPCNode, rpcNodes } from "./rpc-nodes";
 import { PublicClient } from "viem";
@@ -22,36 +28,21 @@ type ChainInfo = {
 };
 
 export const chains: ChainInfo = {
-  1: {
-    chain: mainnet,
-    rpcNode: rpcNodes[1],
+  [mainnet.id]: { chain: mainnet, rpcNode: rpcNodes[mainnet.id] },
+  [arbitrum.id]: { chain: arbitrum, rpcNode: rpcNodes[arbitrum.id] },
+  [avalanche.id]: { chain: avalanche, rpcNode: rpcNodes[avalanche.id] },
+  [optimism.id]: { chain: optimism, rpcNode: rpcNodes[optimism.id] },
+  [polygon.id]: { chain: polygon, rpcNode: rpcNodes[polygon.id] },
+  [base.id]: { chain: base, rpcNode: rpcNodes[base.id] },
+  [gnosis.id]: { chain: gnosis, rpcNode: rpcNodes[gnosis.id] },
+  [sepolia.id]: { chain: sepolia, rpcNode: rpcNodes[sepolia.id] },
+  [celo.id]: { chain: celo, rpcNode: rpcNodes[celo.id] },
+  [sonic.id]: { chain: sonic, rpcNode: rpcNodes[sonic.id] },
+  [berachain.id]: { chain: berachain, rpcNode: rpcNodes[berachain.id] },
+  [mantle.id]: { chain: mantle, rpcNode: rpcNodes[mantle.id] },
+  [polygonZkEvm.id]: {
+    chain: polygonZkEvm,
+    rpcNode: rpcNodes[polygonZkEvm.id],
   },
-  42161: {
-    chain: arbitrum,
-    rpcNode: rpcNodes[42161],
-  },
-  43114: {
-    chain: avalanche,
-    rpcNode: rpcNodes[43114],
-  },
-  10: {
-    chain: optimism,
-    rpcNode: rpcNodes[10],
-  },
-  137: {
-    chain: polygon,
-    rpcNode: rpcNodes[137],
-  },
-  8453: {
-    chain: base,
-    rpcNode: rpcNodes[8453],
-  },
-  100: {
-    chain: gnosis,
-    rpcNode: rpcNodes[100],
-  },
-  11155111: {
-    chain: sepolia,
-    rpcNode: rpcNodes[11155111],
-  },
+  [baseSepolia.id]: { chain: baseSepolia, rpcNode: rpcNodes[baseSepolia.id] },
 };
