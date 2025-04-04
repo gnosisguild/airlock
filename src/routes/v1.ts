@@ -27,16 +27,18 @@ const generateChainRoutes = (router: Router) => {
     );
 
     // Create WebSocket Proxy routes for each chain
-    router.use(
-      `/${chainId}/rpc/ws`,
-      createProxyMiddleware({
-        target: chain.rpcNode.socketUrl,
-        changeOrigin: true,
-        pathRewrite: { [`^/api/v1/${chainId}/rpc/ws`]: "" },
-        auth: `${chain.rpcNode.username}:${chain.rpcNode.password}`,
-        ws: true,
-      }),
-    );
+    if (chain.rpcNode.socketUrl) {
+      router.use(
+        `/${chainId}/rpc/ws`,
+        createProxyMiddleware({
+          target: chain.rpcNode.socketUrl,
+          changeOrigin: true,
+          pathRewrite: { [`^/api/v1/${chainId}/rpc/ws`]: "" },
+          auth: `${chain.rpcNode.username}:${chain.rpcNode.password}`,
+          ws: true,
+        }),
+      );
+    }
 
     // Create Sequence Indexer Proxy routes for each chain
     if (process.env.MORALIS_API_KEY === undefined) {
