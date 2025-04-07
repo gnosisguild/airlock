@@ -78,17 +78,15 @@ export const rpcNodes: RPCNodes = {
     url: "https://ethereum-sepolia.core.chainstack.com",
     socketUrl: "wss://ethereum-sepolia.core.chainstack.com",
   },
-  [celo.id]: {
-    username: process.env.CELO_RPC_USERNAME,
-    password: process.env.CELO_RPC_PASSWORD,
-    url: "https://celo-mainnet.core.chainstack.com",
-    socketUrl: "wss://celo-mainnet.core.chainstack.com",
-  },
   [sonic.id]: {
     username: process.env.SONIC_RPC_USERNAME,
     password: process.env.SONIC_RPC_PASSWORD,
     url: "https://sonic-mainnet.core.chainstack.com",
     socketUrl: "wss://sonic-mainnet.core.chainstack.com",
+  },
+  [celo.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=celo&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=celo&dkey=${DRPC_API_KEY}`,
   },
   [berachain.id]: {
     url: `https://lb.drpc.org/ogrpc?network=berachain&dkey=${DRPC_API_KEY}`,
