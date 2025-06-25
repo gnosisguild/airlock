@@ -1,18 +1,26 @@
 import {
   mainnet,
-  arbitrum,
-  avalanche,
   optimism,
-  base,
   gnosis,
-  sepolia,
-  celo,
-  sonic,
-  berachain,
   polygon,
-  mantle,
+  avalanche,
+  arbitrum,
+  bsc,
+  sepolia,
+  base,
+  celo,
   polygonZkEvm,
   baseSepolia,
+  mantle,
+  sonic,
+  berachain,
+  unichain,
+  bob,
+  worldchain,
+  linea,
+  ink,
+  blast,
+  flare,
 } from "viem/chains";
 
 export type RPCNode = {
@@ -84,6 +92,10 @@ export const rpcNodes: RPCNodes = {
     url: "https://sonic-mainnet.core.chainstack.com",
     socketUrl: "wss://sonic-mainnet.core.chainstack.com",
   },
+  [bsc.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=bsc&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=bsc&dkey=${DRPC_API_KEY}`,
+  },
   [celo.id]: {
     url: `https://lb.drpc.org/ogrpc?network=celo&dkey=${DRPC_API_KEY}`,
     socketUrl: `wss://lb.drpc.org/ogws?network=celo&dkey=${DRPC_API_KEY}`,
@@ -103,5 +115,33 @@ export const rpcNodes: RPCNodes = {
   [baseSepolia.id]: {
     url: `https://lb.drpc.org/ogrpc?network=base-sepolia&dkey=${DRPC_API_KEY}`,
     socketUrl: `wss://lb.drpc.org/ogws?network=base-sepolia&dkey=${DRPC_API_KEY}`,
+  },
+  [bob.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=bob&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=bob&dkey=${DRPC_API_KEY}`,
+  },
+  [unichain.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=unichain&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=unichain&dkey=${DRPC_API_KEY}`,
+  },
+  [worldchain.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=worldchain&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=worldchain&dkey=${DRPC_API_KEY}`,
+  },
+  [linea.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=linea&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=linea&dkey=${DRPC_API_KEY}`,
+  },
+  [ink.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=ink&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=ink&dkey=${DRPC_API_KEY}`,
+  },
+  [blast.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=blast&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=blast&dkey=${DRPC_API_KEY}`,
+  },
+  [flare.id]: {
+    url: `https://lb.drpc.org/ogrpc?network=flare&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=flare&dkey=${DRPC_API_KEY}`,
   },
 };
