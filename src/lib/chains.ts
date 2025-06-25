@@ -20,7 +20,7 @@ import {
   linea,
   ink,
   blast,
-  flare,
+  // flare,
   Chain,
 } from "viem/chains";
 import { RPCNode, rpcNodes } from "./rpc-nodes";
@@ -59,6 +59,6 @@ export const chains: ChainInfo = {
   [linea.id]: { chain: linea, rpcNode: rpcNodes[linea.id] },
   [ink.id]: { chain: ink, rpcNode: rpcNodes[ink.id] },
   [blast.id]: { chain: blast, rpcNode: rpcNodes[blast.id] },
-  [flare.id]: { chain: flare, rpcNode: rpcNodes[flare.id] },
+  // [flare.id]: { chain: flare, rpcNode: rpcNodes[flare.id] },
   [baseSepolia.id]: { chain: baseSepolia, rpcNode: rpcNodes[baseSepolia.id] },
 };
