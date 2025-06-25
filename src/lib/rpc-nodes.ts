@@ -20,7 +20,7 @@ import {
   linea,
   ink,
   blast,
-  flare,
+  // flare,
 } from "viem/chains";
 
 export type RPCNode = {
@@ -140,8 +140,8 @@ export const rpcNodes: RPCNodes = {
     url: `https://lb.drpc.org/ogrpc?network=blast&dkey=${DRPC_API_KEY}`,
     socketUrl: `wss://lb.drpc.org/ogws?network=blast&dkey=${DRPC_API_KEY}`,
   },
-  [flare.id]: {
-    url: `https://lb.drpc.org/ogrpc?network=flare&dkey=${DRPC_API_KEY}`,
-    socketUrl: `wss://lb.drpc.org/ogws?network=flare&dkey=${DRPC_API_KEY}`,
-  },
+  // [flare.id]: {
+  //   url: `https://lb.drpc.org/ogrpc?network=flare&dkey=${DRPC_API_KEY}`, // not supported by drpc
+  //   socketUrl: `wss://lb.drpc.org/ogws?network=flare&dkey=${DRPC_API_KEY}`,
+  // },
 };
