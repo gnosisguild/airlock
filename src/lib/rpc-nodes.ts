@@ -24,8 +24,6 @@ import {
 } from "viem/chains";
 
 export type RPCNode = {
-  username?: string;
-  password?: string;
   url: string;
   socketUrl: string;
 };
@@ -39,58 +37,40 @@ if (!DRPC_API_KEY) {
 
 export const rpcNodes: RPCNodes = {
   [mainnet.id]: {
-    username: process.env.MAINNET_RPC_USERNAME,
-    password: process.env.MAINNET_RPC_PASSWORD,
-    url: "https://ethereum-mainnet.core.chainstack.com",
-    socketUrl: "wss://ethereum-mainnet.core.chainstack.com",
+    url: `https://lb.drpc.org/ogrpc?network=ethereum&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=ethereum&dkey=${DRPC_API_KEY}`,
   },
   [arbitrum.id]: {
-    username: process.env.ARBITRUM_RPC_USERNAME,
-    password: process.env.ARBITRUM_RPC_PASSWORD,
-    url: "https://arbitrum-mainnet.core.chainstack.com",
-    socketUrl: "wss://arbitrum-mainnet.core.chainstack.com",
+    url: `https://lb.drpc.org/ogrpc?network=arbitrum&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=arbitrum&dkey=${DRPC_API_KEY}`,
   },
   [avalanche.id]: {
-    username: process.env.AVALANCHE_RPC_USERNAME,
-    password: process.env.AVALANCHE_RPC_PASSWORD,
-    url: "https://avalanche-mainnet.core.chainstack.com/ext/bc/C/rpc",
-    socketUrl: "wss://avalanche-mainnet.core.chainstack.com/ext/bc/C/ws",
+    url: `https://lb.drpc.org/ogrpc?network=avalanche&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=avalanche&dkey=${DRPC_API_KEY}`,
   },
   [optimism.id]: {
-    username: process.env.OPTIMISM_RPC_USERNAME,
-    password: process.env.OPTIMISM_RPC_PASSWORD,
-    url: "https://nd-007-647-713.p2pify.com",
-    socketUrl: "wss://ws-nd-007-647-713.p2pify.com",
+    url: `https://lb.drpc.org/ogrpc?network=optimism&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=optimism&dkey=${DRPC_API_KEY}`,
   },
   [polygon.id]: {
-    username: process.env.POLYGON_RPC_USERNAME,
-    password: process.env.POLYGON_RPC_PASSWORD,
-    url: "https://polygon-mainnet.core.chainstack.com",
-    socketUrl: "wss://polygon-mainnet.core.chainstack.com",
+    url: `https://lb.drpc.org/ogrpc?network=polygon&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=polygon&dkey=${DRPC_API_KEY}`,
   },
   [base.id]: {
-    username: process.env.BASE_RPC_USERNAME,
-    password: process.env.BASE_RPC_PASSWORD,
-    url: "https://nd-092-619-550.p2pify.com",
-    socketUrl: "wss://ws-nd-092-619-550.p2pify.com",
+    url: `https://lb.drpc.org/ogrpc?network=base&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=base&dkey=${DRPC_API_KEY}`,
   },
   [gnosis.id]: {
-    username: process.env.GNOSIS_RPC_USERNAME,
-    password: process.env.GNOSIS_RPC_PASSWORD,
-    url: "https://nd-696-263-600.p2pify.com",
-    socketUrl: "wss://ws-nd-696-263-600.p2pify.com",
+    url: `https://lb.drpc.org/ogrpc?network=gnosis&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=gnosis&dkey=${DRPC_API_KEY}`,
   },
   [sepolia.id]: {
-    username: process.env.SEPOLIA_RPC_USERNAME,
-    password: process.env.SEPOLIA_RPC_PASSWORD,
-    url: "https://ethereum-sepolia.core.chainstack.com",
-    socketUrl: "wss://ethereum-sepolia.core.chainstack.com",
+    url: `https://lb.drpc.org/ogrpc?network=sepolia&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=sepolia&dkey=${DRPC_API_KEY}`,
   },
   [sonic.id]: {
-    username: process.env.SONIC_RPC_USERNAME,
-    password: process.env.SONIC_RPC_PASSWORD,
-    url: "https://sonic-mainnet.core.chainstack.com",
-    socketUrl: "wss://sonic-mainnet.core.chainstack.com",
+    url: `https://lb.drpc.org/ogrpc?network=sonic&dkey=${DRPC_API_KEY}`,
+    socketUrl: `wss://lb.drpc.org/ogws?network=sonic&dkey=${DRPC_API_KEY}`,
   },
   [bsc.id]: {
     url: `https://lb.drpc.org/ogrpc?network=bsc&dkey=${DRPC_API_KEY}`,
@@ -140,8 +120,4 @@ export const rpcNodes: RPCNodes = {
     url: `https://lb.drpc.org/ogrpc?network=blast&dkey=${DRPC_API_KEY}`,
     socketUrl: `wss://lb.drpc.org/ogws?network=blast&dkey=${DRPC_API_KEY}`,
   },
-  // [flare.id]: {
-  //   url: `https://lb.drpc.org/ogrpc?network=flare&dkey=${DRPC_API_KEY}`, // not supported by drpc
-  //   socketUrl: `wss://lb.drpc.org/ogws?network=flare&dkey=${DRPC_API_KEY}`,
-  // },
 };
