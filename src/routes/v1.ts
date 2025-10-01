@@ -20,9 +20,6 @@ const generateChainRoutes = (router: Router) => {
         target: chain.rpcNode.url,
         changeOrigin: true,
         pathRewrite: { [`^/api/v1/${chainId}/rpc`]: "" },
-        auth:
-          chain.rpcNode.username &&
-          `${chain.rpcNode.username}:${chain.rpcNode.password}`,
       }),
     );
 
@@ -34,7 +31,6 @@ const generateChainRoutes = (router: Router) => {
           target: chain.rpcNode.socketUrl,
           changeOrigin: true,
           pathRewrite: { [`^/api/v1/${chainId}/rpc/ws`]: "" },
-          auth: `${chain.rpcNode.username}:${chain.rpcNode.password}`,
           ws: true,
         }),
       );
